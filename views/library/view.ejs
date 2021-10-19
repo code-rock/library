@@ -12,7 +12,9 @@
                         <p class="card-text"><%= book.authors || notSet %></p>
                         <p class="card-text"><%= book.favorite || notSet %></p>
                         <p class="card-text"><%= book.fileName || notSet %></p>
-                        <a class="card-text"><%= book.fileBook || notSet %></a>
+                        <a class="card-text" href="<%= book.fileBook || notSet %>">
+                            <%= book.fileBook || notSet %>
+                        </a>
                     </div>
 
                     <div class="col-sm-4">
