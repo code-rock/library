@@ -27,9 +27,10 @@ router.post('/create', upload.fields([
     { name: 'fileBook', maxCount: 1 }
   ]), (req, res) => {
     const { books } = store;
-    const { title, description, authors, favorite, fileCover, fileName, fileBook } = req.body;
-
-    const newBook = new Book(title, description, authors, favorite, fileCover, fileName, fileBook)
+    const { title, description, authors, favorite, fileName } = req.body;
+    const fileCover = req.files.fileCover ? req.files.fileCover[0].path: undefined;
+    const fileBook = req.files.fileBook ? req.files.fileBook[0].path: undefined;
+    const newBook = new Book(title, description, authors, favorite, fileCover, fileName, fileBook);
     books.push(newBook);
     res.redirect('/')
 });
@@ -83,7 +84,9 @@ router.post('/update/:id',  upload.fields([
     { name: 'fileBook', maxCount: 1 }
   ]), (req, res) => {
     const { books } = store;
-    const { title, description, authors, favorite, fileCover, fileName, fileBook } = req.body;
+    const { title, description, authors, favorite, fileName } = req.body;
+    const fileCover = req.files.fileCover ? req.files.fileCover[0].path: undefined;
+    const fileBook = req.files.fileBook ? req.files.fileBook[0].path: undefined;
     const { id } = req.params;
     const idx = books.findIndex(el => el.id === id);
 
